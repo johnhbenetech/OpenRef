@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+ 
+
+
+
+{% block content %}
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1">
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-3">All Providers</h1>
+			<p class="lead">This is a table of all providers</p>
+		</div>
+	</div>
+	</div>
+	</div>
+	
+	<div class="row">
+	<div class="col-xs-10 col-xs-offset-1">
+	<table class="display table table-bordered" id="clienti">
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="first_name">First Name</th>
+      <th data-field="last_name">Last Name</th>
+      <th data-field="street_address">Street Address</th>
+      <th data-field="street_address2">Street Address 2</th>
+      <th data-field="city">City</th>
+      <th data-field="state">State</th>
+      <th data-field="zipcode">Zipcode</th>
+      <th data-field="updated_date">Updated</th>
+    </tr>
+  </thead>
+
+</table>
+	
+	
+	</div>
+	</div>
+
+{% endblock %}
+
+
+
+
+
+
+{% block javascript %}
+
+
+<script>
+$(document).ready(function(){
+
+  $.ajax({
+       url: 'http://localhost:8000/api/provider/?format=json',
+       dataType: 'json',
+	   beforeSend : function( xhr ) {
+        xhr.setRequestHeader( "Authorization", "Token ab01c030362e0cbe1c60628acc9bd63505651e6c");
+	   },
+       success: function(data) {
+           $('#clienti').bootstrapTable({
+              data: data
+           });
+       },
+       error: function(e) {
+           console.log(e.responseText);
+       }
+    });
+ });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+
+
+
+{% endblock %}

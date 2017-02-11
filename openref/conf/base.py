@@ -32,11 +32,25 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
 	'rest_framework',
+	'rest_framework.authtoken',
+	'corsheaders',
 	'rest_framework_swagger',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+		'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+	'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -47,6 +61,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'urls'
+CORS_ORIGIN_ALLOW_ALL  = True
 
 TEMPLATES = [
     {

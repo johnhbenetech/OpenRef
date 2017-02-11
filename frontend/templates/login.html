@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+
+
+<div class="container">
+    <div class="row">
+        <div class="Absolute-Center is-Responsive">
+		<div class="col-xs-10">
+            <div class="login-panel panel panel-default" style="min-width:450px;">
+                <div class="panel-heading">
+                    <p class="panel-title text-center">Please Sign In</p>
+                </div>
+                <div class="panel-body">
+				<div class="row">
+				<div class="text-center">
+				<img src="../static/images/CLSMF_logo.png" class="img-fluid" alt="Logo" style="margin-bottom:15px;">
+				</div>
+				</div>
+				<form id="loginForm" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+					{% csrf_token %}
+					
+
+						<div class="form-group input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							{{ form.username }}          
+						  </div>
+						  <div class="form-group input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							{{ form.password }}     
+						  </div>
+						  
+					{% if form.errors %}
+					<div class="alert alert-danger" role="alert">
+						Your username and password didn't match. Please try again.
+					</div>
+					
+					{% else %}
+					{% if next %}
+					{% if user.is_authenticated %}
+						
+					<div class="alert alert-danger" role="alert">
+						Your account doesn't have access to this page. To proceed, please login with an account that has access.
+					</div>
+					{% else %}
+					<div class="alert alert-danger" role="alert">
+						Please login to see this page.
+					</div>
+					{% endif %}
+					
+					{% endif %}
+					{% endif %}
+						  <div class="form-group">
+							<button type="submit" class="btn btn-primary btn-block"><strong>Login</strong></button>
+						  </div>
+					
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+{% if not user.is_authenticated %}
+$("ul.nav.navbar-nav.navbar-right").css("display","none");
+{% endif %}
+</script>
+
+{% endblock %}
