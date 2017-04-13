@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'provider', ProviderViewSet)
 router.register(r'update', UpdateViewSet)
 
+
 schema_view = get_swagger_view(title="API Docs")
 
 urlpatterns = [

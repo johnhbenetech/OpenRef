@@ -13,7 +13,7 @@ sys.path.append(
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a'
+SECRET_KEY = '(5d%mshni^pt2-*pxrhxk4uzhnqv_#uf^r6hsca(5s0o$%5ip-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
